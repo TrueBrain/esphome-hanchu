@@ -61,13 +61,13 @@ ONCE_AFTER_BOOT = cg.RawExpression("esphome::hanchu_ble::ONCE_AFTER_BOOT")
 KEY_GROUPS = {
     "device": ["P002", "P003", "P008", "P005", "P006", "P007", "P139", "L023", "P000", "L034", "P011"],
     "pv": ["P024", "P025", "P026", "P027", "P028", "P029", "P060", "P061", "P062", "P237"],
-    "grid": ["P644", "P044", "P045", "P053", "P055", "P056", "P057"],
+    "grid": ["P644", "P044", "P045", "P053", "P055", "P056", "P057", "P640", "P641", "P642", "P643"],
     "battery": ["P071", "P069", "P067", "P068", "P070", "P075", "P076", "P088", "P142", "P063", "P064"],
     "eps": ["P079", "P080", "P081", "P082", "P083", "P084", "P085"],
     "settings": ["P651", "L017", "L018", "P647", "P648", "P772", "L074", "P236", "P245"],
     "slots": ["L005", "L006", "L007", "L008", "L009", "L010", "L011", "L012", "L013", "L014", "L015", "L016"],
     "clock": ["L094", "L020", "L096"],
-    "unmapped": ["P640", "P641", "P642", "P643", "P498", "P499", "P240", "P241"],
+    "unmapped": ["P498", "P499", "P240", "P241"],
 }
 KEY_TO_GROUP = {key: group for group, keys in KEY_GROUPS.items() for key in keys}
 
@@ -95,6 +95,11 @@ def _reactive_power(key):
 
 def _energy(key):
     return SensorSpec(key, UNIT_KILOWATT_HOURS, DEVICE_CLASS_ENERGY, STATE_CLASS_TOTAL_INCREASING, 1)
+
+
+def _energy_snapshot(key):
+    # No state class: the value jumps at midnight instead of counting up
+    return SensorSpec(key, UNIT_KILOWATT_HOURS, DEVICE_CLASS_ENERGY, None, 1)
 
 
 def _voltage(key):
@@ -141,6 +146,11 @@ SENSOR_TYPES = {
     "inverter_active_power": _power("P055"),
     "inverter_reactive_power": _reactive_power("P056"),
     "power_factor": SensorSpec("P057", None, DEVICE_CLASS_POWER_FACTOR, STATE_CLASS_MEASUREMENT, 2),
+    "grid_import_total": _energy("P640"),
+    "grid_export_total": _energy("P641"),
+    # The meter only has lifetime counters, so "today" is the total minus its value at midnight
+    "grid_import_midnight": _energy_snapshot("P642"),
+    "grid_export_midnight": _energy_snapshot("P643"),
     # PV
     "pv_power": _power("P060"),  # DC coupled
     "pv_ac_power": _power("P237"),  # sign differs between firmware versions
