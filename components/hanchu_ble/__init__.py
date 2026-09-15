@@ -61,14 +61,14 @@ ONCE_AFTER_BOOT = cg.RawExpression("esphome::hanchu_ble::ONCE_AFTER_BOOT")
 KEY_GROUPS = {
     "device": ["P002", "P003", "P008", "P005", "P006", "P007", "P139", "L023", "P000", "L034", "P011"],
     "pv": ["P024", "P025", "P026", "P027", "P028", "P029", "P060", "P061", "P062"],
-    "pv_ac": ["P237", "P242", "P243", "P244"],
+    "pv_ac": ["P237", "P242", "P243", "P244", "P240", "P241"],
     "grid": ["P644", "P044", "P045", "P053", "P055", "P056", "P057", "P640", "P641", "P642", "P643"],
     "battery": ["P071", "P069", "P067", "P068", "P070", "P075", "P076", "P088", "P142", "P063", "P064"],
     "eps": ["P079", "P080", "P081", "P082", "P083", "P084", "P085"],
     "settings": ["P651", "L017", "L018", "P647", "P648", "P772", "L074", "P236", "P245"],
     "slots": ["L005", "L006", "L007", "L008", "L009", "L010", "L011", "L012", "L013", "L014", "L015", "L016"],
     "clock": ["L094", "L020", "L096"],
-    "unmapped": ["P498", "P499", "P240", "P241"],
+    "unmapped": ["P498", "P499"],
 }
 KEY_TO_GROUP = {key: group for group, keys in KEY_GROUPS.items() for key in keys}
 
@@ -167,6 +167,10 @@ SENSOR_TYPES = {
     "pv_ac_power_l1": _power("P242"),
     "pv_ac_power_l2": _power("P243"),
     "pv_ac_power_l3": _power("P244"),
+    "pv_ac_forward_total": _energy("P240"),
+    "pv_ac_reverse_total": _energy("P241"),
+    "pv_ac_meter_enabled": SensorSpec("P236"),  # 0 off, 1 on
+    "pv_ac_meter_direction": SensorSpec("P245"),  # 0 import, 1 export
     # Backup output
     "eps_voltage": _voltage("P079"),
     "eps_current": _current("P080"),
