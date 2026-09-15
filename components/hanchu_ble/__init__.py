@@ -60,7 +60,7 @@ ONCE_AFTER_BOOT = cg.RawExpression("esphome::hanchu_ble::ONCE_AFTER_BOOT")
 # https://github.com/upton68/hanchu-ess-ble/blob/main/docs/hanchu-ble-local-protocol-mapping.md
 KEY_GROUPS = {
     "device": ["P002", "P003", "P008", "P005", "P006", "P007", "P139", "L023", "P000", "L034", "P011"],
-    "pv": ["P024", "P025", "P026", "P027", "P028", "P029", "P060", "P061", "P062", "P237"],
+    "pv": ["P024", "P025", "P026", "P027", "P028", "P029", "P060", "P061", "P062", "P237", "P242", "P243", "P244"],
     "grid": ["P644", "P044", "P045", "P053", "P055", "P056", "P057", "P640", "P641", "P642", "P643"],
     "battery": ["P071", "P069", "P067", "P068", "P070", "P075", "P076", "P088", "P142", "P063", "P064"],
     "eps": ["P079", "P080", "P081", "P082", "P083", "P084", "P085"],
@@ -154,6 +154,9 @@ SENSOR_TYPES = {
     # PV
     "pv_power": _power("P060"),  # DC coupled
     "pv_ac_power": _power("P237"),  # sign differs between firmware versions
+    "pv_ac_power_l1": _power("P242"),
+    "pv_ac_power_l2": _power("P243"),
+    "pv_ac_power_l3": _power("P244"),
     "pv_energy_today": _energy("P061"),
     "pv_energy_total": _energy("P062"),
     "pv1_voltage": _voltage("P024"),
