@@ -69,7 +69,8 @@ Every sensor and text sensor also accepts:
 
 - Battery: `battery_soc`, `battery_power` (positive = discharging), `battery_voltage`, `battery_current` (positive = discharging), `battery_temperature`, `battery_charge_today`, `battery_discharge_today`, `battery_capacity`, `battery_state`
 - Grid: `grid_power` (positive = import), `grid_import_total`, `grid_export_total`, `grid_import_midnight`, `grid_export_midnight`, `grid_voltage_l1`, `grid_current_l1`, `grid_frequency`, `inverter_active_power`, `inverter_reactive_power`, `power_factor`
-- PV: `pv_power`, `pv_ac_power`, `pv_ac_power_l1`, `pv_ac_power_l2`, `pv_ac_power_l3`, `pv_energy_today`, `pv_energy_total`, `pv1_voltage`, `pv1_current`, `pv2_voltage`, `pv2_current`, `pv3_voltage`, `pv3_current`
+- PV, DC coupled: `pv_power`, `pv_energy_today`, `pv_energy_total`, `pv1_voltage`, `pv1_current`, `pv2_voltage`, `pv2_current`, `pv3_voltage`, `pv3_current`
+- PV, AC coupled: `pv_ac_power`, `pv_ac_power_l1`, `pv_ac_power_l2`, `pv_ac_power_l3`
 - Backup output: `eps_voltage`, `eps_current`, `eps_frequency`, `eps_power`, `eps_reactive_power`, `eps_energy_today`, `eps_energy_total`
 - Settings: `work_mode`, `charge_power_limit`, `discharge_power_limit`, `max_charge_soc`, `min_soc_on_grid`, `max_grid_charge_soc`
 - Device: `rated_power`, `phase_mode`, `meter_type`, `utc_offset`
